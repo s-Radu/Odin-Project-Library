@@ -8,7 +8,7 @@ The librery is sectioned in two sections, Read and Not Read, as soon as one of t
 
 ### Author
 
-A project built by [lil void](@s-Radu)
+A project built by [lil void](https://github.com/s-Radu)
 
 ---
 
