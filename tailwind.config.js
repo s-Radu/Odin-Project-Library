@@ -10,6 +10,9 @@ module.exports = {
         montserat: '"Montserrat", sans-serif',
         nunito: '"Nunito", sans-serif',
       },
+      gridTemplateColumns: {
+        "auto-fill": "repeat(auto-fill, minmax(320px, 1fr))",
+      },
     },
   },
   plugins: [],
