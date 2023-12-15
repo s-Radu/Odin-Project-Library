@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "tailwindcss": "^3.3.6"
+  },
+  "dependencies": {
+    "tailwindcss-pseudo-elements": "^2.0.0"
   }
 }
