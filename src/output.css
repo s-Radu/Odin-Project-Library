@@ -645,6 +645,14 @@ video {
   inset-inline-end: 0.25rem;
 }
 
+.top-2\/4 {
+  top: 50%;
+}
+
+.top-0 {
+  top: 0px;
+}
+
 .isolate {
   isolation: isolate;
 }
@@ -2144,6 +2152,10 @@ video {
   font-family: "Nunito", sans-serif;
 }
 
+.font-montserat {
+  font-family: "Montserrat", sans-serif;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -2735,6 +2747,40 @@ video {
 
 .hover\:before\:text-center:hover::before {
   text-align: center;
+}
+
+.first-letter\:float-left::first-letter {
+  float: left;
+}
+
+.first-letter\:mr-3::first-letter {
+  margin-right: 0.75rem;
+}
+
+.first-letter\:font-josefin::first-letter {
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.first-letter\:text-7xl::first-letter {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+
+.first-letter\:font-bold::first-letter {
+  font-weight: 700;
+}
+
+.first-letter\:text-white::first-letter {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.first-line\:uppercase::first-line {
+  text-transform: uppercase;
+}
+
+.first-line\:tracking-widest::first-line {
+  letter-spacing: 0.1em;
 }
 
 :is(.dark .dark\:bg-gray-950) {
