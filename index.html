@@ -41,16 +41,52 @@
 
     <main class="container mx-auto flex flex-col items-center">
         <button
-            class="inline-flex items-center border-0 py-1 px-3 m-4 focus:outline-none rounded-2xl transition ease-in-out delay-75 duration-300 hover:bg-blue-400 ">
+            class="inline-flex items-center border-0 py-1 px-3 m-4 focus:outline-none rounded-2xl transition ease-in-out delay-75 duration-300 hover:bg-blue-400 "
+            id="add-book">
             <img src="/imgs/button.svg" alt="button srv" class="h-8">
             Add Book
         </button>
+
+        <dialog id="book-dialog" class="rounded-2xl ">
+            <form method="dialog"
+                class="flex flex-col p-4 gap-2 rounded-2xl dark:bg-slate-700 text-white border-2 border-slate-800">
+                <div class="flex justify-between">
+                    <label for="book-name" class="text-lg">Book Name: </label>
+                    <input type="text" id="book-name" name="book-name" class="rounded indent-2 border-2 " required>
+                </div>
+                <div class="flex justify-between mt-2">
+                    <label for="book-author" class="text-lg">Author: </label>
+                    <input type="text" id="book-author" name="book-author" class="rounded indent-2 border-2" required>
+                </div>
+                <div class="flex justify-between mt-2">
+                    <label for="pages" class="text-lg">Pages: </label>
+                    <input type="text" id="pages" name="pages" class="rounded indent-2 border-2" required>
+                </div>
+                <div class="flex flex-col justify-between mt-2">
+                    <label for="quote" class="text-lg text-center">Quote?: </label>
+                    <textarea name="quote" id="quote" cols="40" rows="5"
+                        class="rounded-2xl indent-2 border-2 p-1 resize-none"></textarea>
+                </div>
+                <div class="flex flex-col justify-between mt-2">
+                    <label for="description" class="text-center">Description?: </label>
+                    <textarea name="description" id="description" cols="40" rows="5"
+                        class="rounded-2xl indent-2 border-2 p-1 resize-none"></textarea>
+                </div>
+                <div class="flex justify-between m-4">
+                    <button type="submit"
+                        class="bg-stone-500 hover:bg-stone-600 font-bold py-2 px-4 border-b-4 border-stone-700 hover:border-stone-500 rounded text-white">Add
+                        Book</button>
+                    <button type="button" id="close-button"
+                        class="bg-stone-500 hover:bg-stone-600 font-bold py-2 px-4 border-b-4 border-stone-700 hover:border-stone-500 rounded text-white">Close</button>
+                </div>
+            </form>
+        </dialog>
 
         <h1 class="text-5xl m-20 text-center" id="read">Books read</h1>
 
         <section class="w-3/4 mx-auto grid grid-cols-auto-fill">
 
-            <div class="p-4 transition ease-in-out delay-75 duration-200 min-h-card relative ">
+            <div class="p-4 transition ease-in-out delay-75 duration-200 min-h-card relative book ">
                 <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden card">
 
                     <div class="h-full p-6 flex flex-col justify-between card-content">
@@ -74,8 +110,7 @@
                         <div class="flex flex-col">
                             <div class="flex gap-4  mx-auto justify-around align-center m-10 ">
                                 <button
-                                    class="read bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded w-20"
-                                    disabled>Read</button>
+                                    class="read bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded w-20">Read</button>
                                 <button
                                     class="not-read  bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded w-20  ">Remove</button>
                             </div>
@@ -135,6 +170,7 @@
                 </div>
             </div>
 
+
         </section>
 
         <h1 class="text-5xl m-20 text-center">Books not read</h1>
@@ -166,8 +202,7 @@
                         <div class="flex flex-col">
                             <div class="flex gap-4  mx-auto justify-around align-center m-10 ">
                                 <button
-                                    class="read bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded w-20"
-                                    disabled>Read</button>
+                                    class="read bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded w-20">Read</button>
                                 <button
                                     class="not-read  bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded w-20  ">Remove</button>
                             </div>
