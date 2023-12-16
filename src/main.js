@@ -144,8 +144,6 @@ function showBookDetails(e) {
   const cardContent = cardElement.querySelector(".card-content");
   const bookDetails = cardElement.nextElementSibling;
 
-  readButton.disabled = true;
-  notReadButton.disabled = true;
   cardContent.classList.add("exits");
   cardContent.classList.remove("enters");
 
@@ -168,8 +166,6 @@ function hideBookDetails(e) {
     const cardContent = prevSibling.querySelector(".card-content");
     const bookDetails = prevSibling.nextElementSibling;
 
-    readButton.disabled = false;
-    notReadButton.disabled = false;
     cardContent.classList.remove("exits");
     cardContent.classList.add("enters");
 
@@ -199,7 +195,7 @@ function createBookCard(book, isRead) {
 
       <div class="h-full p-6 flex flex-col justify-between card-content">
           <div class="book-info">
-              <h1 class="text-5xl text-center m-10 border-b-2 border-gray-400 p-1">${capitalizeFirstLetter(
+              <h1 class="text-5xl text-center m-10 border-b-2 border-gray-400 p-1 book-title">${capitalizeFirstLetter(
                 book.name
               )}</h1>
               <h2 class="tracking-widest text-center text-xl font-medium text-gray-200 mb-3">Author</h2>
@@ -226,7 +222,7 @@ function createBookCard(book, isRead) {
                   <button
                       class="read bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded w-20">Read</button>
                   <button
-                      class="not-read  bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded w-20  ">Remove</button>
+                      class="remove  bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded w-20  ">Remove</button>
               </div>
 
               <div class="flex items-center justify-self-end">
@@ -288,6 +284,19 @@ function randomNumber(num) {
   return Math.floor(Math.random() * num + 1);
 }
 
+function removeBook(e) {
+  const bookElement = e.target.closest(".book");
+  const bookTitle = bookElement.querySelector(".book-title").textContent;
+
+  readLibrary = readLibrary.filter((book) => book.name !== bookTitle);
+  notReadLibrary = notReadLibrary.filter((book) => book.name !== bookTitle);
+
+  localStorage.setItem("readLibrary", JSON.stringify(readLibrary));
+  localStorage.setItem("notReadLibrary", JSON.stringify(notReadLibrary));
+
+  bookElement.remove();
+}
+
 //! Event listeners
 
 document.addEventListener("click", function (e) {
@@ -295,6 +304,12 @@ document.addEventListener("click", function (e) {
     showBookDetails(e);
   } else if (e.target.matches(".less")) {
     hideBookDetails(e);
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (e.target.matches(".remove")) {
+    removeBook(e);
   }
 });
 
