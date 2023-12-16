@@ -206,10 +206,10 @@ function createBookCard(book, isRead) {
                 <div class="flex items-center justify-self-end">
                     <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0 cursor-pointer more">
                         More
-                        <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                        <svg class="w-4 h-4 ml-2 cursor-default" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
                             fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14"></path>
-                            <path d="M12 5l7 7-7 7"></path>
+                            <path d="M12 19V5"></path>
+                            <path d="M19 12l-7 -7 -7 7"></path>
                         </svg>
                     </a>
                     <span
@@ -245,7 +245,7 @@ function createBookCard(book, isRead) {
         </p>
         <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0 cursor-pointer less">
             Less
-            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
+            <svg class="w-4 h-4 ml-2 cursor-default" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 5v14"></path>
                 <path d="M19 12l-7 7-7-7"></path>
