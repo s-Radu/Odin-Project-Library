@@ -286,7 +286,15 @@ function randomNumber(num) {
 
 function removeBook(e) {
   const bookElement = e.target.closest(".book");
+  if (!bookElement) {
+    console.error("Book element not found");
+    return;
+  }
   const bookTitle = bookElement.querySelector(".book-title").textContent;
+  if (!bookTitle) {
+    console.error("Book title element not found");
+    return;
+  }
 
   readLibrary = readLibrary.filter((book) => book.name !== bookTitle);
   notReadLibrary = notReadLibrary.filter((book) => book.name !== bookTitle);
