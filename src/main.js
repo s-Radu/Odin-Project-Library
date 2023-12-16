@@ -40,10 +40,17 @@ function addBookToLibrary(e) {
   if (formValidation()) {
     const bookName = bookNameInput.value;
     const bookAuthor = bookAuthorInput.value;
-    const bookQuote = bookQuoteInput.value;
-    const bookDescription = bookDescriptionInput.value;
+    let bookQuote = bookQuoteInput.value;
+    let bookDescription = bookDescriptionInput.value;
     const pagesNumber = pagesNumberInput.value;
     const readBook = readBookInput.value;
+
+    if (bookQuote.trim() === "") {
+      bookQuote = "No quote provided";
+    }
+    if (bookDescription.trim() === "") {
+      bookDescription = "No description provided";
+    }
 
     const newBook = new Book(
       bookName,
@@ -54,11 +61,12 @@ function addBookToLibrary(e) {
       readBook
     );
 
-    if (readBook.value === "yes") {
+    if (readBook === "yes") {
       readLibrary.push(newBook);
-    } else {
+    } else if (readBook === "no") {
       notReadLibrary.push(newBook);
     }
+    console.log(readBook);
 
     clearDialog();
     dialog.close();
