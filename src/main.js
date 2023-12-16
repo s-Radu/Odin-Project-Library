@@ -15,6 +15,23 @@ const bookDescriptionInput = document.getElementById("description");
 const pagesNumberInput = document.getElementById("pages");
 const readBookInput = document.getElementById("book-read");
 
+//> Book array
+let readLibrary = [];
+let notReadLibrary = [];
+
+//? new book class constructor
+
+class Book {
+  constructor(name, author, quote, description, pages, read) {
+    this.name = name;
+    this.author = author;
+    this.quote = quote;
+    this.description = description;
+    this.pages = pages;
+    this.read = read;
+  }
+}
+
 //* Functions
 
 function addBookToLibrary(e) {
@@ -28,18 +45,25 @@ function addBookToLibrary(e) {
     const pagesNumber = pagesNumberInput.value;
     const readBook = readBookInput.value;
 
-    console.log(
-      `
-          Book name: ${bookName}
-          Book author: ${bookAuthor}
-          Book quote: ${bookQuote}
-          Book description: ${bookDescription}
-          Pages number: ${pagesNumber}
-          Read book: ${readBook}
-          `
+    const newBook = new Book(
+      bookName,
+      bookAuthor,
+      bookQuote,
+      bookDescription,
+      pagesNumber,
+      readBook
     );
+
+    if (readBook.value === "yes") {
+      readLibrary.push(newBook);
+    } else {
+      notReadLibrary.push(newBook);
+    }
+
     clearDialog();
     dialog.close();
+    console.log(readLibrary);
+    console.log(notReadLibrary);
   }
 }
 
