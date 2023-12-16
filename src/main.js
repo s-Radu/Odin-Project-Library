@@ -19,6 +19,7 @@ const readBookInput = document.getElementById("book-read");
 
 function addBookToLibrary(e) {
   e.preventDefault();
+
   formValidation();
   const bookName = bookNameInput.value;
   const bookAuthor = bookAuthorInput.value;
@@ -124,6 +125,8 @@ function formValidation() {
   const bookAuthorValue = bookAuthorInput.value.trim();
   const bookNumberValue = pagesNumberInput.value.trim();
 
+  const positiveIntegerRagex = /^\d+$/;
+
   if (bookNameValue === "") {
     setErrorFor("Book name cannot be blank");
     bookNameInput.focus();
@@ -133,7 +136,7 @@ function formValidation() {
   } else if (bookNumberValue === "") {
     setErrorFor("Pages number cannot be blank");
     pagesNumberInput.focus();
-  } else if (isNaN(bookNumberValue) || bookNumberValue <= 0) {
+  } else if (!positiveIntegerRagex.test(bookNumberValue)) {
     setErrorFor("Pages number must be a number");
     pagesNumberInput.focus();
   } else {
