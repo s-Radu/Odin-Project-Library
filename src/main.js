@@ -20,24 +20,72 @@ const readBookInput = document.getElementById("book-read");
 function addBookToLibrary(e) {
   e.preventDefault();
 
-  formValidation();
-  const bookName = bookNameInput.value;
-  const bookAuthor = bookAuthorInput.value;
-  const bookQuote = bookQuoteInput.value;
-  const bookDescription = bookDescriptionInput.value;
-  const pagesNumber = pagesNumberInput.value;
-  const readBook = readBookInput.value;
+  if (formValidation()) {
+    const bookName = bookNameInput.value;
+    const bookAuthor = bookAuthorInput.value;
+    const bookQuote = bookQuoteInput.value;
+    const bookDescription = bookDescriptionInput.value;
+    const pagesNumber = pagesNumberInput.value;
+    const readBook = readBookInput.value;
 
-  console.log(
-    `
-    Book name: ${bookName}
-    Book author: ${bookAuthor}
-    Book quote: ${bookQuote}
-    Book description: ${bookDescription}
-    Pages number: ${pagesNumber}
-    Read book: ${readBook}
-    `
-  );
+    console.log(
+      `
+          Book name: ${bookName}
+          Book author: ${bookAuthor}
+          Book quote: ${bookQuote}
+          Book description: ${bookDescription}
+          Pages number: ${pagesNumber}
+          Read book: ${readBook}
+          `
+    );
+    clearDialog();
+    dialog.close();
+  }
+}
+
+//* Form validation for number input
+
+function setErrorFor(message) {
+  const errorMessage = dialog.querySelector(".error-message");
+  errorMessage.innerText = message;
+}
+function setSuccessFor() {
+  const errorMessage = dialog.querySelector(".error-message");
+  errorMessage.innerText = "";
+}
+
+function formValidation() {
+  const bookNameValue = bookNameInput.value.trim();
+  const bookAuthorValue = bookAuthorInput.value.trim();
+  const bookNumberValue = pagesNumberInput.value.trim();
+
+  const positiveIntegerRagex = /^\d+$/;
+
+  if (bookNameValue === "") {
+    setErrorFor("Book name cannot be blank");
+    bookNameInput.focus();
+  } else if (bookAuthorValue === "") {
+    setErrorFor("Book author cannot be blank");
+    bookAuthorInput.focus();
+  } else if (bookNumberValue === "") {
+    setErrorFor("Pages number cannot be blank");
+    pagesNumberInput.focus();
+  } else if (!positiveIntegerRagex.test(bookNumberValue)) {
+    setErrorFor("Pages number must be a number");
+    pagesNumberInput.focus();
+    return false;
+  } else {
+    setSuccessFor();
+    return true;
+  }
+}
+
+function clearDialog() {
+  bookNameInput.value = "";
+  bookAuthorInput.value = "";
+  bookQuoteInput.value = "";
+  bookDescriptionInput.value = "";
+  pagesNumberInput.value = "";
 }
 
 submitBookBtn.addEventListener("click", addBookToLibrary);
@@ -106,40 +154,6 @@ openButton.addEventListener("click", () => {
 });
 
 closeButton.addEventListener("click", () => {
+  clearDialog();
   dialog.close();
 });
-
-//* Form validation for number input
-
-function setErrorFor(message) {
-  const errorMessage = dialog.querySelector(".error-message");
-  errorMessage.innerText = message;
-}
-function setSuccessFor() {
-  const errorMessage = dialog.querySelector(".error-message");
-  errorMessage.innerText = "";
-}
-
-function formValidation() {
-  const bookNameValue = bookNameInput.value.trim();
-  const bookAuthorValue = bookAuthorInput.value.trim();
-  const bookNumberValue = pagesNumberInput.value.trim();
-
-  const positiveIntegerRagex = /^\d+$/;
-
-  if (bookNameValue === "") {
-    setErrorFor("Book name cannot be blank");
-    bookNameInput.focus();
-  } else if (bookAuthorValue === "") {
-    setErrorFor("Book author cannot be blank");
-    bookAuthorInput.focus();
-  } else if (bookNumberValue === "") {
-    setErrorFor("Pages number cannot be blank");
-    pagesNumberInput.focus();
-  } else if (!positiveIntegerRagex.test(bookNumberValue)) {
-    setErrorFor("Pages number must be a number");
-    pagesNumberInput.focus();
-  } else {
-    setSuccessFor();
-  }
-}
