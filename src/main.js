@@ -3,6 +3,8 @@
 const bookDetailsBtn = document.querySelectorAll(".more");
 const hodeBookDetailsBtn = document.querySelectorAll(".less");
 
+const book = document.querySelectorAll(".book");
+
 const dialog = document.getElementById("book-dialog");
 const openButton = document.getElementById("add-book");
 const submitBookBtn = document.getElementById("submit-book");
@@ -176,6 +178,10 @@ function hideBookDetails(e) {
   }
 }
 
+function firstLetterUpperCase(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 function createBookCard(book, isRead) {
   const newBookCard = document.createElement("div");
 
@@ -185,15 +191,17 @@ function createBookCard(book, isRead) {
 
       <div class="h-full p-6 flex flex-col justify-between card-content">
           <div class="book-info">
-              <h1 class="text-5xl text-center m-10 border-b-2 border-gray-400 p-1">Book title</h1>
+              <h1 class="text-5xl text-center m-10 border-b-2 border-gray-400 p-1">${firstLetterUpperCase(
+                book.name
+              )}</h1>
               <h2 class="tracking-widest text-center text-xl font-medium text-gray-200 mb-3">Author</h2>
               <h2
                   class="tracking-widest text-center text-2xl font-medium text-gray-200 mb-1 border-b-2 border-gray-400">
-                  J. K. Rowlings</h2>
+                  ${firstLetterUpperCase(book.author)}</h2>
           </div>
           <div class="flex justify-between m-2">
               <p class="text-sm text-left"> Pages: </p>
-              <p class="number-of-pages text sm text-right">64s</p>
+              <p class="number-of-pages text sm text-right">${book.pages}</p>
           </div>
 
           <div class="quote-section border-2 border-gray-400 rounded-2xl m-2 mt-10">
@@ -201,8 +209,7 @@ function createBookCard(book, isRead) {
                   Quote</h2>
               <p class="text-left indent-6 pb-4 m-4 font-medium text-gray-200 mb-1 border-gray-400 italic font-nunito
               before:quote-content after:quote-content ">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore eligendi deserunt qui
-                  beatae provident consectetur eveniet error laudantium, doloribus sit!
+                  ${firstLetterUpperCase(book.quote)}
               </p>
           </div>
 
@@ -248,15 +255,7 @@ function createBookCard(book, isRead) {
       first-letter:text-7xl first-letter:font-bold
       first-letter:mr-3 first-letter:float-left m-4
     ">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores maxime, quibusdam
-          voluptates ab in ducimus illum numquam fugit tempora, cupiditate alias perspiciatis saepe
-          qui
-          explicabo, possimus illo? Incidunt, perferendis magni. Veritatis possimus quam illum at
-          expedita? A iure nulla inventore, ipsum possimus tenetur optio. Sed, deleniti. Minus
-          nesciunt
-          pariatur similique id. Magni recusandae facilis exercitationem dolores culpa consequuntur
-          dolor
-          nisi!
+          ${firstLetterUpperCase(book.description)}
       </p>
       <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0 cursor-pointer less">
           Less
@@ -278,6 +277,14 @@ function createBookCard(book, isRead) {
 }
 
 //! Event listeners
+
+document.addEventListener("click", function (e) {
+  if (e.target.matches(".more")) {
+    showBookDetails(e);
+  } else if (e.target.matches(".less")) {
+    hideBookDetails(e);
+  }
+});
 
 bookDetailsBtn.forEach((btn) => {
   btn.addEventListener("click", showBookDetails);
