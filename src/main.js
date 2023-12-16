@@ -169,7 +169,7 @@ function createBookCard(book, isRead) {
   
         <div class="h-full p-6 flex flex-col justify-between card-content">
             <div class="book-info">
-                <h1 class="text-5xl text-center m-10 border-b-2 border-gray-400 p-1 book-title">${capitalizeFirstLetter(
+                <h1 class="text-5xl text-center break-words m-10 border-b-2 border-gray-400 p-1 book-title">${capitalizeFirstLetter(
                   book.name
                 )}</h1>
                 <h2 class="tracking-widest text-center text-xl font-medium text-gray-200 mb-3">Author</h2>
