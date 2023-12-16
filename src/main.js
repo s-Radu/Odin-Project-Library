@@ -154,9 +154,13 @@ function createBookCard(book, isRead) {
   newBookCard.className =
     "p-4 transition ease-in-out delay-75 duration-200 min-h-card relative book";
 
+  let bookRead;
+
   if (isRead === true) {
     newBookCard.classList.add("read-book");
+    bookRead = "Read";
   } else {
+    bookRead = "Not Read";
     newBookCard.classList.add("book-not-read");
   }
 
@@ -192,11 +196,11 @@ function createBookCard(book, isRead) {
             </div>
   
             <div class="flex flex-col">
-                <div class="flex gap-4  mx-auto justify-around align-center m-10 ">
+                <div class="flex gap-10 mx-auto align-center m-10 ">
                     <button
-                        class="read bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded w-20">Read</button>
+                        class="read bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded ">${bookRead}</button>
                     <button
-                        class="remove  bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded w-20  ">Remove</button>
+                        class="remove  bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded  ">Remove</button>
                 </div>
   
                 <div class="flex items-center justify-self-end">
@@ -348,6 +352,12 @@ document.addEventListener("click", (e) => {
 
 document.addEventListener("click", (e) => {
   if (e.target.matches(".read")) {
+    if (e.target.closest(".book").classList.contains("read-book")) {
+      e.target.textContent = "Not Read";
+    } else {
+      e.target.textContent = "Read";
+      console.log("this book is not read");
+    }
     console.log(e.target.closest(".book"));
   }
 });
