@@ -39,8 +39,8 @@ class Book {
 //< Build the library back when window is refreshed
 
 window.onload = function () {
-  let readLibrary = JSON.parse(localStorage.getItem("readLibrary")) || [];
-  let notReadLibrary = JSON.parse(localStorage.getItem("notReadLibrary")) || [];
+  readLibrary = JSON.parse(localStorage.getItem("readLibrary")) || [];
+  notReadLibrary = JSON.parse(localStorage.getItem("notReadLibrary")) || [];
 
   readLibrary.forEach((book) => createBookCard(book, true));
   notReadLibrary.forEach((book) => createBookCard(book, false));
@@ -188,9 +188,10 @@ function capitalizeFirstLetter(string) {
 
 function createBookCard(book, isRead) {
   const newBookCard = document.createElement("div");
+  newBookCard.className =
+    "p-4 transition ease-in-out delay-75 duration-200 min-h-card relative book";
 
   newBookCard.innerHTML = `
-  <div class="p-4 transition ease-in-out delay-75 duration-200 min-h-card relative book ">
   <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden card">
 
       <div class="h-full p-6 flex flex-col justify-between card-content">
@@ -270,7 +271,6 @@ function createBookCard(book, isRead) {
           </svg>
       </a>
   </div>
-</div>
 
   `;
   if (isRead) {
@@ -290,11 +290,13 @@ function removeBook(e) {
     console.error("Book element not found");
     return;
   }
-  const bookTitle = bookElement.querySelector(".book-title").textContent;
-  if (!bookTitle) {
+  const bookTitleElement = bookElement.querySelector(".book-title");
+  if (!bookTitleElement) {
     console.error("Book title element not found");
     return;
   }
+
+  const bookTitle = bookTitleElement.textContent.toLowerCase();
 
   readLibrary = readLibrary.filter((book) => book.name !== bookTitle);
   notReadLibrary = notReadLibrary.filter((book) => book.name !== bookTitle);
