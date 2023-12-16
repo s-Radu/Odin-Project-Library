@@ -164,10 +164,6 @@ function createBookCard(book, isRead) {
     newBookCard.classList.add("book-not-read");
   }
 
-  const viewsId = Date.now().toString();
-  const viewsId2 = Date.now().toString();
-  const commsId = Date.now().toString();
-
   newBookCard.innerHTML = `
     <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden card">
   
@@ -218,11 +214,7 @@ function createBookCard(book, isRead) {
                             stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                             <circle cx="12" cy="12" r="3"></circle>
-                        </svg>${randomNumber(
-                          900,
-                          viewsId,
-                          "suffix1"
-                        )}.${randomNumber(9, viewsId2, "suffix2")}K
+                        </svg>${randomNumber(900)}.${randomNumber(9)}K
                     </span>
                     <span class="text-gray-400 inline-flex items-center leading-none text-sm">
                         <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
@@ -230,7 +222,7 @@ function createBookCard(book, isRead) {
                             <path
                                 d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
                             </path>
-                        </svg>${randomNumber(10000, commsId, "suffix3")}
+                        </svg>${randomNumber(10000)}
                     </span>
                 </div>
             </div>
@@ -262,16 +254,18 @@ function createBookCard(book, isRead) {
 }
 
 function randomNumber(num, bookId, keySuffix) {
-  //! Trying to save the info on the cards views and comms but it keeps on changing even with localStorage
-  const randomNumberKey = `randomNumber-${bookId}-${keySuffix}`;
+  //   //! Trying to save the info on the cards views and comms but it keeps on changing even with localStorage
+  //   const randomNumberKey = `randomNumber-${bookId}-${keySuffix}`;
 
-  let randomNumber = localStorage.getItem(randomNumberKey);
+  //   let randomNumber = localStorage.getItem(randomNumberKey);
 
-  if (!randomNumber) {
-    randomNumber = Math.floor(Math.random() * num + 1);
-    localStorage.setItem(randomNumberKey, randomNumber.toString());
-  }
-  return randomNumber;
+  //   if (!randomNumber) {
+  //     randomNumber = Math.floor(Math.random() * num + 1);
+  //     localStorage.setItem(randomNumberKey, randomNumber.toString());
+  //   }
+  //   return randomNumber;
+
+  return Math.floor(Math.random() * num + 1);
 }
 
 function removeBook(e) {
