@@ -153,6 +153,7 @@ function createBookCard(book, isRead) {
   const newBookCard = document.createElement("div");
   newBookCard.className =
     "p-4 transition ease-in-out delay-75 duration-200 min-h-card relative book";
+  newBookCard.setAttribute(`data-id`, `${book.name.toLowerCase()}`);
 
   let bookRead;
 
@@ -291,6 +292,39 @@ function removeBook(e) {
   bookElement.remove();
 }
 
+function updateBookSections(e) {
+  const bookElement = e.target.closest(".book");
+  const bookName = bookElement.dataset.id;
+
+  let book = readLibrary.find((book) => book.name.toLowerCase() === bookName);
+  let isRead = true;
+  if (!book) {
+    book = notReadLibrary.find((book) => book.name.toLowerCase() === bookName);
+    isRead = false;
+  }
+  book.raed = !book.read;
+
+  if (isRead) {
+    readLibrary = readLibrary.filter(
+      (book) => book.name.toLowerCase() !== bookName
+    );
+    notReadLibrary.push(book);
+  } else {
+    notReadLibrary = notReadLibrary.filter(
+      (book) => book.name.toLowerCase() !== bookName
+    );
+    readLibrary.push(book);
+  }
+
+  localStorage.setItem("readLibrary", JSON.stringify(readLibrary));
+  localStorage.setItem("notReadLibrary", JSON.stringify(notReadLibrary));
+
+  e.target.textContent = isRead ? "Not Read" : "Read";
+
+  const otherSection = document.querySelector(isRead ? "#not-read" : "#read");
+  otherSection.appendChild(bookElement);
+}
+
 //* Form validation for number input
 
 function setErrorFor(message) {
@@ -345,15 +379,7 @@ document.addEventListener("click", (e) => {
 });
 
 document.addEventListener("click", (e) => {
-  if (e.target.matches(".read")) {
-    if (e.target.closest(".book").classList.contains("read-book")) {
-      e.target.textContent = "Not Read";
-    } else {
-      e.target.textContent = "Read";
-      console.log("this book is not read");
-    }
-    console.log(e.target.closest(".book"));
-  }
+  updateBookSections(e);
 });
 
 openButton.addEventListener("click", () => {
