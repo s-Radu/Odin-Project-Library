@@ -3,8 +3,6 @@
 const bookDetailsBtn = document.querySelectorAll(".more");
 const hodeBookDetailsBtn = document.querySelectorAll(".less");
 
-const book = document.querySelectorAll(".book");
-
 const dialog = document.getElementById("book-dialog");
 const openButton = document.getElementById("add-book");
 const submitBookBtn = document.getElementById("submit-book");
@@ -38,6 +36,16 @@ class Book {
   }
 }
 
+//< Build the library back when window is refreshed
+
+window.onload = function () {
+  let readLibrary = JSON.parse(localStorage.getItem("readLibrary")) || [];
+  let notReadLibrary = JSON.parse(localStorage.getItem("notReadLibrary")) || [];
+
+  readLibrary.forEach((book) => createBookCard(book, true));
+  notReadLibrary.forEach((book) => createBookCard(book, false));
+};
+
 //* Functions
 
 function addBookToLibrary(e) {
@@ -70,17 +78,17 @@ function addBookToLibrary(e) {
     if (readBook === "yes") {
       readLibrary.push(newBook);
       let lastReadLibraryBook = readLibrary[readLibrary.length - 1];
+      localStorage.setItem("readLibrary", JSON.stringify(readLibrary));
       createBookCard(lastReadLibraryBook, true);
     } else if (readBook === "no") {
       notReadLibrary.push(newBook);
       let lastNotReadLibraryBook = notReadLibrary[notReadLibrary.length - 1];
+      localStorage.setItem("notReadLibrary", JSON.stringify(notReadLibrary));
       createBookCard(lastNotReadLibraryBook, false);
     }
 
     clearDialog();
     dialog.close();
-    console.log(readLibrary);
-    console.log(notReadLibrary);
   }
 }
 
@@ -178,8 +186,8 @@ function hideBookDetails(e) {
   }
 }
 
-function firstLetterUpperCase(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function createBookCard(book, isRead) {
@@ -191,13 +199,13 @@ function createBookCard(book, isRead) {
 
       <div class="h-full p-6 flex flex-col justify-between card-content">
           <div class="book-info">
-              <h1 class="text-5xl text-center m-10 border-b-2 border-gray-400 p-1">${firstLetterUpperCase(
+              <h1 class="text-5xl text-center m-10 border-b-2 border-gray-400 p-1">${capitalizeFirstLetter(
                 book.name
               )}</h1>
               <h2 class="tracking-widest text-center text-xl font-medium text-gray-200 mb-3">Author</h2>
               <h2
                   class="tracking-widest text-center text-2xl font-medium text-gray-200 mb-1 border-b-2 border-gray-400">
-                  ${firstLetterUpperCase(book.author)}</h2>
+                  ${capitalizeFirstLetter(book.author)}</h2>
           </div>
           <div class="flex justify-between m-2">
               <p class="text-sm text-left"> Pages: </p>
@@ -209,7 +217,7 @@ function createBookCard(book, isRead) {
                   Quote</h2>
               <p class="text-left indent-6 pb-4 m-4 font-medium text-gray-200 mb-1 border-gray-400 italic font-nunito
               before:quote-content after:quote-content ">
-                  ${firstLetterUpperCase(book.quote)}
+                  ${capitalizeFirstLetter(book.quote)}
               </p>
           </div>
 
@@ -236,7 +244,7 @@ function createBookCard(book, isRead) {
                           stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                           <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                           <circle cx="12" cy="12" r="3"></circle>
-                      </svg>1.2K
+                      </svg>${randomNumber(9)}.${randomNumber(9)}K
                   </span>
                   <span class="text-gray-400 inline-flex items-center leading-none text-sm">
                       <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
@@ -244,7 +252,7 @@ function createBookCard(book, isRead) {
                           <path
                               d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
                           </path>
-                      </svg>6
+                      </svg>${randomNumber(1000)}
                   </span>
               </div>
           </div>
@@ -255,7 +263,7 @@ function createBookCard(book, isRead) {
       first-letter:text-7xl first-letter:font-bold
       first-letter:mr-3 first-letter:float-left m-4
     ">
-          ${firstLetterUpperCase(book.description)}
+          ${capitalizeFirstLetter(book.description)}
       </p>
       <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0 cursor-pointer less">
           Less
@@ -276,6 +284,10 @@ function createBookCard(book, isRead) {
   }
 }
 
+function randomNumber(num) {
+  return Math.floor(Math.random() * num + 1);
+}
+
 //! Event listeners
 
 document.addEventListener("click", function (e) {
@@ -284,14 +296,6 @@ document.addEventListener("click", function (e) {
   } else if (e.target.matches(".less")) {
     hideBookDetails(e);
   }
-});
-
-bookDetailsBtn.forEach((btn) => {
-  btn.addEventListener("click", showBookDetails);
-});
-
-hodeBookDetailsBtn.forEach((btn) => {
-  btn.addEventListener("click", hideBookDetails);
 });
 
 openButton.addEventListener("click", () => {
