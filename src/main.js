@@ -293,6 +293,7 @@ function removeBook(e) {
 }
 
 function updateBookSections(e) {
+  //! It behaves abnormal, no matter wherever else you click on the book, it still triggers this, also we have a weird behaviour on the comments and views, clicking them turns the book blank and only shows if is read or not read.
   const bookElement = e.target.closest(".book");
   const bookName = bookElement.dataset.id;
 
@@ -379,7 +380,9 @@ document.addEventListener("click", (e) => {
 });
 
 document.addEventListener("click", (e) => {
-  updateBookSections(e);
+  if (e.target.matches(".read") || e.target.matches(".not-read")) {
+    updateBookSections(e);
+  }
 });
 
 openButton.addEventListener("click", () => {
