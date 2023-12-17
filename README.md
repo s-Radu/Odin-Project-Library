@@ -28,13 +28,13 @@ This project is not licenced and it's part of the Odin Project learning trail
 .  
 ├── imgs  
 ├── src  
-│ ├── animations.css  
-│ ├── input.css  
-│ ├── main.js  
-│ └── output.css  
+│   ├── animations.css  
+│   ├── input.css  
+│   ├── main.js  
+│   └── output.css  
 ├── index.html  
-├── .gitignore
-├── README.md  
+├── .gitignore  
+├── README.MD  
 ├── package-lock.json  
 ├── package.json  
 ├── tailwind.config.js
