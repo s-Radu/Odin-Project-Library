@@ -200,7 +200,7 @@ function createBookCard(book, isRead) {
                         class="remove  bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded  ">Remove</button>
                 </div>
   
-                <div class="flex items-center justify-self-end">
+                <div class="flex items-center justify-between">
                     <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0 cursor-pointer more">
                         More
                         <svg class="w-4 h-4 ml-2 cursor-default" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
@@ -209,6 +209,7 @@ function createBookCard(book, isRead) {
                             <path d="M19 12l-7 -7 -7 7"></path>
                         </svg>
                     </a>
+                    <div>
                     <span
                         class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
                         <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
@@ -225,6 +226,7 @@ function createBookCard(book, isRead) {
                             </path>
                         </svg>${randomNumber(10000)}
                     </span>
+                    </div>
                 </div>
             </div>
         </div>
