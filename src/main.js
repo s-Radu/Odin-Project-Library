@@ -294,6 +294,7 @@ function removeBook(e) {
 
 function updateBookSections(e) {
   //! It behaves abnormal, no matter wherever else you click on the book, it still triggers this, also we have a weird behaviour on the comments and views, clicking them turns the book blank and only shows if is read or not read.
+  //* Bug was fixed, was due to not having checks on the click event, now it only triggers when the button is clicked
   const bookElement = e.target.closest(".book");
   const bookName = bookElement.dataset.id;
 
