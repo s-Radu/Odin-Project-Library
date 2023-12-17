@@ -25,7 +25,7 @@ This project is not licenced and it's part of the Odin Project learning trail
 
 ### Tree
 
-.  
+
 ├── imgs  
 ├── src  
 │   ├── animations.css  
