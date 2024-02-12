@@ -323,7 +323,7 @@ function updateBookSections(e) {
   localStorage.setItem("readLibrary", JSON.stringify(readLibrary));
   localStorage.setItem("notReadLibrary", JSON.stringify(notReadLibrary));
 
-  e.target.textContent = isRead ? "Not Read" : "Read";
+  e.target.textContent = isRead ? "Read" : "Not Read ";
 
   const otherSection = document.querySelector(isRead ? "#not-read" : "#read");
   otherSection.appendChild(bookElement);
