@@ -159,9 +159,9 @@ function createBookCard(book, isRead) {
 
   if (isRead === true) {
     newBookCard.classList.add("read-book");
-    bookRead = "Not Read";
-  } else {
     bookRead = "Read";
+  } else {
+    bookRead = "Not Read";
     newBookCard.classList.add("book-not-read");
   }
 
